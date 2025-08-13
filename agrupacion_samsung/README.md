@@ -1,6 +1,6 @@
 # Análisis de Agrupación para Datos de Samsung
 
-Este script realiza un análisis de agrupación (clustering) utilizando el algoritmo K-Means para identificar patrones en los datos históricos de precios de cierre y volumen de operaciones de Samsung.
+Este script realiza un análisis de agrupación (clustering) utilizando el algoritmo K-Means para identificar patrones en los datos históricos de precios de cierre y volumen de operaciones de Samsung utilizando información proporcionada por medio de un csv.
 
 ## Características principales
 
@@ -20,7 +20,7 @@ Este script realiza un análisis de agrupación (clustering) utilizando el algor
 
 ## Estructura del código
 
-```python
+
 # Importación de librerías necesarias
 import pandas as pd  # Para manipulación y análisis de datos
 import numpy as np   # Para operaciones numéricas
@@ -125,3 +125,14 @@ plt.show()
 # ------------------------------
 print("\nCaracterísticas promedio por cluster:")
 print(df.groupby('Cluster')[['Close', 'Volume']].mean())
+
+´´´
+
+# Justificación del algoritmo
+
+Se seleccionó K-Means debido a que es un algoritmo eficiente y ampliamente utilizado para la agrupación de datos numéricos escalados, como el precio de cierre y el volumen de operaciones presentes en samsung.csv. Además, K-Means permite una interpretación clara de los centroides y facilita la visualización de clusters en dos dimensiones.
+Otras opciones, como DBSCAN, presentaron inconvenientes debido a la gran cantidad de los datos, lo que generó clusters poco representativos. El clustering jerárquico, aunque útil para análisis exploratorio, es computacionalmente más costoso y menos escalable con conjuntos de datos grandes como este.
+
+# Evaluación del modelo
+
+El silhouette score obtenido fue de 0.7, lo que indica que los clusters están bien definidos y separados entre sí. Este valor sugiere que las observaciones dentro de cada cluster son muy similares y que la separación entre grupos es adecuada, lo que valida el uso de K-Means para este conjunto de datos.

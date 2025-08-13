@@ -114,3 +114,22 @@ plt.xlabel('Número de Componentes')
 plt.ylabel('Varianza Acumulada')
 plt.grid()
 plt.show()
+
+# Justificación del algoritmo
+Se eligió PCA (Análisis de Componentes Principales) porque es un método eficiente para reducción de dimensionalidad cuando se busca capturar la mayor varianza posible bajo la suposición de relaciones lineales entre las variables. PCA permite comprimir información y facilitar la visualización en 2D, lo que ayuda a identificar patrones en el conjunto de datos comprar_alquilar.csv. Alternativas como t-SNE o UMAP ofrecen ventajas en la preservación de relaciones no lineales, pero requieren mayor costo computacional y parámetros de ajuste más delicados. En este caso, la estructura de los datos y la necesidad de interpretabilidad justifican el uso de PCA.
+
+# Diseño del modelo y aporte de PCA
+Antes de aplicar PCA, se realizó una estandarización de los datos para garantizar que todas las variables contribuyeran de forma equitativa a las componentes principales. Con 2 componentes, se capturó aproximadamente el 85% de la varianza total, lo que permite representar de manera clara la mayor parte de la información original en un espacio bidimensional. Esto simplifica el problema y facilita tanto la interpretación como la detección visual de grupos de comportamiento en la decisión de compra o alquiler.
+
+La posterior aplicación de K-Means sobre el espacio reducido no era requisito inicial, pero permitió verificar que las proyecciones de PCA revelaban separaciones consistentes entre grupos, validando que la reducción de dimensionalidad estaba preservando información relevante para la segmentación.
+
+# Interpretación de resultados
+La visualización PCA mostró que las observaciones se agrupan en regiones diferenciadas según la variable objetivo (comprar). La varianza acumulada confirmó que pocas componentes son suficientes para representar gran parte de la estructura de los datos, optimizando el análisis y reduciendo el ruido.
+
+# Se eligió PCA sobre otros métodos como:
+
+## LDA (Análisis Discriminante Lineal):
+    Aunque útil para clasificación, asume que las clases están normalmente distribuidas y requiere la variable objetivo para proyectar los datos. En   nuestro caso, queríamos un método no supervisado para explorar patrones ocultos.
+
+## t-SNE/UMAP:
+    Ideales para visualizar estructuras no lineales, pero son computacionalmente costosos y sus componentes no son interpretables (solo sirven para visualización). PCA, en cambio, permite interpretar las componentes mediante cargas factoriales.
