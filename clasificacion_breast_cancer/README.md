@@ -52,34 +52,3 @@ Métricas principales utilizadas:
 | AUC-ROC         | 0.9952  |
 | Precisión (Maligno) | 0.9744 |
 | Recall (Maligno)    | 0.9815 |
-
-### Gráficas Clave
-
-#### 1. Matriz de Confusión
-![Matriz de Confusión](confusion_matrix.png)
-- **Interpretación**: El modelo tiene solo 2 falsos negativos (casos malignos clasificados como benignos), lo cual es crítico en aplicaciones médicas.
-
-#### 2. Curva ROC
-![Curva ROC](roc_curve.png)
-- **AUC-ROC**: 0.995 indica excelente capacidad discriminativa
-- **Interpretación**: El modelo distingue casi perfectamente entre clases
-
-#### 3. Importancia de Características
-![Importancia](feature_importance.png)
-- **Top 3 características**:
-  1. `concave points_worst`
-  2. `perimeter_worst`
-  3. `concave points_mean`
-- **Interpretación**: Las mediciones de "peores" características (valores más extremos) son las más predictivas
-
-## Repositorio del Proyecto
-El código completo, modelo serializado y reporte detallado están disponibles en:
-[GitHub Repository](https://github.com/tu_usuario/breast_cancer_classifier)
-
-## Cómo Utilizar el Modelo
-1. Instalar dependencias: `pip install -r requirements.txt`
-2. Cargar el modelo pre-entrenado:
-   ```python
-   import joblib
-   model = joblib.load('breast_cancer_rf_model.pkl')
-   scaler = joblib.load('scaler.pkl')
