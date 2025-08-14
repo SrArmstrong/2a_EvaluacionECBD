@@ -73,6 +73,48 @@ print('Raíz del error cuadrático medio (RMSE):', np.sqrt(metrics.mean_squared_
 # Coeficiente de determinación R² - proporción de varianza explicada
 print('Coeficiente de determinación R²:', regressor.score(X_test, y_test))
 
+# 8.1 Reentrenamiento y Optimización del Modelo
+# ---------------------------------------------
+
+from sklearn.linear_model import Ridge
+from sklearn.model_selection import GridSearchCV
+
+# Definir rango de valores para alpha (regularización)
+param_grid = {'alpha': [0.01, 0.1, 1, 10, 100]}
+
+# Configurar búsqueda en cuadrícula con validación cruzada
+ridge_grid = GridSearchCV(Ridge(), param_grid, scoring='neg_mean_squared_error', cv=5)
+ridge_grid.fit(X_train, y_train.ravel())  # ravel() para convertir y_train a 1D
+
+# Extraer mejor modelo y parámetros
+best_ridge = ridge_grid.best_estimator_
+best_alpha = ridge_grid.best_params_['alpha']
+best_mse = -ridge_grid.best_score_
+
+print('\n--- Reentrenamiento con Ridge ---')
+print(f"Mejor valor de alpha: {best_alpha}")
+print(f"Mejor MSE (validación cruzada): {best_mse:.4f}")
+
+# Evaluar en conjunto de prueba
+y_pred_ridge = best_ridge.predict(X_test)
+ridge_rmse = np.sqrt(metrics.mean_squared_error(y_test, y_pred_ridge))
+ridge_r2 = best_ridge.score(X_test, y_test)
+
+print(f"RMSE en prueba: {ridge_rmse:.4f}")
+print(f"R² en prueba: {ridge_r2:.4f}")
+
+# Comparar gráficamente con modelo original
+plt.figure(figsize=(10, 6))
+plt.scatter(X_test, y_test, color='blue', label='Datos reales')
+plt.plot(X_test, y_pred, color='red', label='Regresión Lineal')
+plt.plot(X_test, y_pred_ridge, color='green', linestyle='--', label='Ridge Optimizado')
+plt.title('Comparación de Modelos: Lineal vs Ridge', fontsize=14)
+plt.xlabel('Número de Bateos', fontsize=12)
+plt.ylabel('Carreras Anotadas (Runs)', fontsize=12)
+plt.legend()
+plt.grid(True)
+plt.show()
+
 # 9. Parámetros del modelo
 # ------------------------------
 print('\n--- Parámetros del Modelo ---')
