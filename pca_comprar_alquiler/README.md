@@ -141,9 +141,6 @@ Aunque los dos primeros componentes explican solo el **53% de la varianza**, se 
 - **Visualización exploratoria**: El objetivo era representar los datos en 2D para detectar patrones visuales. Para modelado más robusto, se recomienda usar más componentes.
 - **Scree plot**: El gráfico de varianza acumulada muestra que se necesitan **6 componentes** para superar el 80%. Esto se puede calcular con:
 
-```python
-n_componentes_80 = np.where(np.cumsum(pca_full.explained_variance_ratio_) >= 0.80)[0][0] + 1
-print(f"Se necesitan {n_componentes_80} componentes para alcanzar el 80% de varianza.")
 
 # Interpretación de resultados
 La visualización PCA mostró que las observaciones se agrupan en regiones diferenciadas según la variable objetivo (comprar). La varianza acumulada confirmó que pocas componentes son suficientes para representar gran parte de la estructura de los datos, optimizando el análisis y reduciendo el ruido.
